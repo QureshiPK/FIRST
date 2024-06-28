@@ -1,0 +1,61 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+	<head>
+    
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>{% block title %}GoodiesRPK{% endblock title %}</title>
+		<meta name="keywords" content="{%block keywords %} Home Keywords {% endblock keywords %}">
+		<meta name="description" content="{%block description %} Home Description {% endblock description %}">
+		{% load static %}
+        {% block head %} {% endblock head %}
+		{% tailwind_css %}
+	</head>
+	
+	<body>
+		{% include "header.html" %}
+		{% include "header2.html" %}
+		{% block sidebar %} {% endblock sidebar %}
+		{% block slider %} {% endblock slider %}
+		{% block body %} {% endblock body %}
+		{% block foot %} {% endblock foot %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="static/css/dist/secondjava.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+	<script>
+        function setLightTheme() {
+            document.documentElement.classList.remove('dark')
+            localStorage.theme = 'light';
+            document.getElementById('theme-toggle-switch').classList.remove('translate-x-6')
+            document.getElementById('theme-toggle-switch').classList.add('translate-x-0')
+        }
+        function setDarkTheme() {
+            document.documentElement.classList.add('dark')
+            localStorage.theme = 'dark';
+            document.getElementById('theme-toggle-switch').classList.remove('translate-x-0')
+            document.getElementById('theme-toggle-switch').classList.add('translate-x-6')
+        }
+        function intialTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                setDarkTheme();
+            } else {
+                setLightTheme();
+            }
+        }
+        document.getElementById("theme-toggle").addEventListener('click', () => {
+            if(localStorage.theme === 'dark') {
+                setLightTheme();
+            } else {
+                setDarkTheme();
+            }
+        });
+        intialTheme();
+    </script>
+
+
+	</body>
+</html>
